@@ -512,8 +512,7 @@ Potential future improvements include:
  Enhanced frontend interface
  Real-world biometric sensor integration
 
-👩‍💻 About the Project
-BioVerify
+👩‍💻 About the Project:BioVerify
 
 BioVerify was developed as an academic prototype to demonstrate the integration of artificial intelligence, multimodal biometrics, cryptographic hashing, and blockchain technology.
 
@@ -525,11 +524,7 @@ The prototype demonstrates an end-to-end pipeline from biometric feature extract
 This project is developed for academic and educational purposes.
 No specific open-source license has been declared for this repository.
 
-<div align="center">
+
 🔐 BioVerify
-
 Multimodal Biometrics • Adaptive Attention • Blockchain Integrity
-
 Securing Identity. Ensuring Integrity.
-
-</div> ```
