@@ -400,57 +400,45 @@ Visual Studio Code
 MetaMask
 Ethereum Sepolia network access
 Sepolia test ETH for blockchain transactions
+
 📥 Step 1: Clone the Repository
 git clone https://github.com/Shalinips/BioVerify.git
 
 Move into the project directory:
-
 cd BioVerify
+
 🐍 Step 2: Create Virtual Environment
 python -m venv venv
+
 ▶️ Step 3: Activate Virtual Environment
-
 On Windows:
-
 venv\Scripts\activate
+
 📦 Step 4: Install Dependencies
-
 Install the required Python packages:
-
 pip install flask web3 torch torchvision numpy opencv-python python-dotenv
+
 🔐 Step 5: Configure Environment Variables
-
 Create a .env file in the project root.
-
 Add the required blockchain configuration values used by the backend.
-
 Never upload .env or private keys to GitHub.
-
 The repository .gitignore is configured to exclude environment files and the Python virtual environment.
 
 ⛓️ Step 6: Configure Blockchain
-
 The project uses the Ethereum Sepolia test network.
-
 The deployed smart contract is used to record biometric verification information.
-
 The smart contract can be compiled, deployed, and tested using Remix IDE.
 
 🚀 Step 7: Start the Backend
-
 Run:
-
 python backend.py
 
 The Flask backend runs locally at:
-
 http://127.0.0.1:5000
+
 🌐 Step 8: Open the Application
-
 Open the local application in a browser.
-
 Connect MetaMask using the Ethereum Sepolia network.
-
 Select a synthetic user and run the biometric verification.
 
 ▶️ Application Workflow
