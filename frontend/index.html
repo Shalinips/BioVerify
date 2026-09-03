@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>BioVerify</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+
+        background: linear-gradient(135deg, #eef4ff, #f8fbff);
+
+        color: #172033;
+
+        min-height: 100vh;
+
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 1150px;
+
+        margin: auto;
+      }
+
+      header {
+        background: white;
+
+        border-radius: 18px;
+
+        padding: 25px 30px;
+
+        margin-bottom: 20px;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .logo {
+        font-size: 30px;
+
+        font-weight: 800;
+
+        color: #2563eb;
+      }
+
+      .subtitle {
+        margin-top: 7px;
+
+        color: #64748b;
+
+        font-size: 15px;
+      }
+
+      .card {
+        background: white;
+
+        border-radius: 18px;
+
+        padding: 25px 30px;
+
+        margin-bottom: 20px;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+      }
+
+      .card-title {
+        font-size: 20px;
+
+        font-weight: 700;
+
+        margin-bottom: 18px;
+      }
+
+      .connection {
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 15px;
+      }
+
+      .info-box {
+        background: #f8fafc;
+
+        border: 1px solid #e2e8f0;
+
+        border-radius: 12px;
+
+        padding: 15px;
+      }
+
+      .label {
+        font-size: 12px;
+
+        color: #64748b;
+
+        margin-bottom: 7px;
+      }
+
+      .value {
+        font-size: 14px;
+
+        font-weight: 600;
+
+        word-break: break-all;
+      }
+
+      .status {
+        color: #16a34a;
+
+        font-weight: 700;
+      }
+
+      button {
+        border: none;
+
+        border-radius: 10px;
+
+        padding: 13px 22px;
+
+        font-size: 15px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        background: #2563eb;
+
+        color: white;
+
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+
+        transform: translateY(-1px);
+      }
+
+      button:disabled {
+        background: #94a3b8;
+
+        cursor: not-allowed;
+
+        transform: none;
+      }
+
+      .connect-row {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        gap: 20px;
+
+        flex-wrap: wrap;
+      }
+
+      .wallet-status {
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        font-weight: 700;
+      }
+
+      .dot {
+        width: 10px;
+
+        height: 10px;
+
+        border-radius: 50%;
+
+        background: #94a3b8;
+      }
+
+      .dot.connected {
+        background: #22c55e;
+
+        box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+      }
+
+      .form-row {
+        display: flex;
+
+        gap: 15px;
+
+        align-items: end;
+
+        flex-wrap: wrap;
+      }
+
+      .field {
+        flex: 1;
+
+        min-width: 250px;
+      }
+
+      label {
+        display: block;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        margin-bottom: 8px;
+      }
+
+      select {
+        width: 100%;
+
+        padding: 13px;
+
+        border-radius: 10px;
+
+        border: 1px solid #cbd5e1;
+
+        font-size: 15px;
+
+        background: white;
+      }
+
+      .modalities {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 15px;
+
+        margin-top: 20px;
+
+        margin-bottom: 20px;
+      }
+
+      .modality {
+        text-align: center;
+
+        padding: 20px;
+
+        border-radius: 14px;
+
+        background: #f8fafc;
+
+        border: 1px solid #e2e8f0;
+      }
+
+      .modality-icon {
+        font-size: 32px;
+
+        margin-bottom: 8px;
+      }
+
+      .modality-name {
+        font-weight: 700;
+
+        margin-bottom: 5px;
+      }
+
+      .ready {
+        color: #16a34a;
+
+        font-size: 13px;
+
+        font-weight: 700;
+      }
+
+      .result {
+        text-align: center;
+
+        padding: 30px;
+      }
+
+      .result-badge {
+        display: inline-block;
+
+        padding: 12px 30px;
+
+        border-radius: 30px;
+
+        background: #dcfce7;
+
+        color: #15803d;
+
+        font-size: 22px;
+
+        font-weight: 800;
+
+        margin: 15px 0;
+      }
+
+      .score {
+        font-size: 42px;
+
+        font-weight: 800;
+
+        color: #2563eb;
+
+        margin: 10px;
+      }
+
+      .score-label {
+        color: #64748b;
+
+        font-size: 14px;
+      }
+
+      .scores {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 15px;
+
+        margin-top: 20px;
+      }
+
+      .score-box {
+        padding: 15px;
+
+        border-radius: 12px;
+
+        background: #f8fafc;
+
+        border: 1px solid #e2e8f0;
+      }
+
+      .hash {
+        font-family: Consolas, monospace;
+
+        background: #f8fafc;
+
+        border: 1px solid #e2e8f0;
+
+        border-radius: 10px;
+
+        padding: 15px;
+
+        word-break: break-all;
+
+        font-size: 13px;
+
+        color: #334155;
+      }
+
+      .blockchain-result {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 15px;
+
+        margin-top: 15px;
+      }
+
+      .flow {
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 10px;
+
+        flex-wrap: wrap;
+
+        margin-top: 20px;
+      }
+
+      .flow-step {
+        background: #2563eb;
+
+        color: white;
+
+        padding: 12px 18px;
+
+        border-radius: 10px;
+
+        font-size: 13px;
+
+        font-weight: 700;
+      }
+
+      .arrow {
+        color: #2563eb;
+
+        font-size: 22px;
+
+        font-weight: bold;
+      }
+
+      .message {
+        margin-top: 15px;
+
+        padding: 12px;
+
+        border-radius: 10px;
+
+        background: #eff6ff;
+
+        color: #1d4ed8;
+
+        display: none;
+
+        font-size: 14px;
+      }
+
+      .footer {
+        text-align: center;
+
+        color: #64748b;
+
+        font-size: 13px;
+
+        margin-top: 25px;
+
+        margin-bottom: 20px;
+      }
+
+      @media (max-width: 800px) {
+        .connection,
+        .modalities,
+        .scores,
+        .blockchain-result {
+          grid-template-columns: 1fr;
+        }
+
+        body {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- ================================================= -->
+      <!-- HEADER -->
+      <!-- ================================================= -->
+
+      <header>
+        <div class="logo">🔐 BioVerify</div>
+
+        <div class="subtitle">
+          Multimodal Biometric Verification with Blockchain Security
+        </div>
+      </header>
+
+      <!-- ================================================= -->
+      <!-- BLOCKCHAIN CONNECTION -->
+      <!-- ================================================= -->
+
+      <div class="card">
+        <div class="card-title">🔗 Blockchain Connection</div>
+
+        <div class="connect-row">
+          <div class="wallet-status">
+            <span id="walletDot" class="dot"> </span>
+
+            <span id="walletText"> Wallet Not Connected </span>
+          </div>
+
+          <button onclick="connectWallet()">Connect MetaMask</button>
+        </div>
+
+        <br />
+
+        <div class="connection">
+          <div class="info-box">
+            <div class="label">Wallet</div>
+
+            <div id="walletAddress" class="value">Not connected</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Network</div>
+
+            <div id="network" class="value">Ethereum Sepolia</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Smart Contract</div>
+
+            <div id="contract" class="value">Loading...</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Contract Status</div>
+
+            <div id="contractStatus" class="value">Checking...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================= -->
+      <!-- BIOMETRIC VERIFICATION -->
+      <!-- ================================================= -->
+
+      <div class="card">
+        <div class="card-title">🧬 Biometric Verification</div>
+
+        <div class="form-row">
+          <div class="field">
+            <label> Select Synthetic User </label>
+
+            <select id="userSelect">
+              <option value="user_001">user_001</option>
+
+              <option value="user_002">user_002</option>
+
+              <option value="user_003">user_003</option>
+
+              <option value="user_004">user_004</option>
+
+              <option value="user_005">user_005</option>
+            </select>
+          </div>
+
+          <button id="verifyButton" onclick="runVerification()">
+            ▶ Run Verification
+          </button>
+        </div>
+
+        <div class="modalities">
+          <div class="modality">
+            <div class="modality-icon">👤</div>
+
+            <div class="modality-name">Face</div>
+
+            <div class="ready">✓ Ready</div>
+          </div>
+
+          <div class="modality">
+            <div class="modality-icon">🖐️</div>
+
+            <div class="modality-name">Fingerprint</div>
+
+            <div class="ready">✓ Ready</div>
+          </div>
+
+          <div class="modality">
+            <div class="modality-icon">👁️</div>
+
+            <div class="modality-name">Iris</div>
+
+            <div class="ready">✓ Ready</div>
+          </div>
+        </div>
+
+        <div id="message" class="message"></div>
+      </div>
+
+      <!-- ================================================= -->
+      <!-- VERIFICATION RESULT -->
+      <!-- ================================================= -->
+
+      <div class="card">
+        <div class="card-title">📊 Verification Result</div>
+
+        <div class="result">
+          <div class="score-label">Multimodal Similarity Score</div>
+
+          <div id="similarity" class="score">—</div>
+
+          <div id="resultBadge" class="result-badge">WAITING</div>
+
+          <div class="scores">
+            <div class="score-box">
+              <div class="label">Face Similarity</div>
+
+              <div id="faceScore" class="value">—</div>
+            </div>
+
+            <div class="score-box">
+              <div class="label">Fingerprint Similarity</div>
+
+              <div id="fingerprintScore" class="value">—</div>
+            </div>
+
+            <div class="score-box">
+              <div class="label">Iris Similarity</div>
+
+              <div id="irisScore" class="value">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================= -->
+      <!-- SHA-256 -->
+      <!-- ================================================= -->
+
+      <div class="card">
+        <div class="card-title">🔒 SHA-256 Verification Hash</div>
+
+        <div id="hash" class="hash">Waiting for verification...</div>
+      </div>
+
+      <!-- ================================================= -->
+      <!-- BLOCKCHAIN RECORD -->
+      <!-- ================================================= -->
+
+      <div class="card">
+        <div class="card-title">⛓️ Blockchain Record</div>
+
+        <div class="blockchain-result">
+          <div class="info-box">
+            <div class="label">User ID</div>
+            <div id="blockchainUserId" class="value">—</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Verification</div>
+            <div id="blockchainVerified" class="value">—</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Timestamp</div>
+            <div id="blockchainTimestamp" class="value">—</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Network</div>
+            <div id="chainNetwork" class="value">Ethereum Sepolia</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Status</div>
+            <div id="blockchainStatus" class="value">Waiting</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Block Number</div>
+            <div id="blockNumber" class="value">—</div>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="label">Transaction Hash</div>
+
+        <div id="transactionHash" class="hash">Waiting for transaction...</div>
+      </div>
+
+      <!-- ================================================= -->
+      <!-- SYSTEM FLOW -->
+      <!-- ================================================= -->
+
+      <div class="card">
+        <div class="card-title">⚙️ System Flow</div>
+
+        <div class="flow">
+          <div class="flow-step">
+            01<br />
+            BIOMETRICS
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="flow-step">
+            02<br />
+            EMBEDDINGS
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="flow-step">
+            03<br />
+            FUSION
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="flow-step">
+            04<br />
+            SHA-256
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="flow-step">
+            05<br />
+            BLOCKCHAIN
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        BioVerify • Synthetic Prototype • Ethereum Sepolia
+      </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ===================================================== -->
+
+    <script>
+      // =========================================================
+      // Blockchain Information
+      // =========================================================
+
+      async function loadBlockchainInfo() {
+        try {
+          const response = await fetch("/api/blockchain");
+
+          const data = await response.json();
+
+          document.getElementById("contract").innerText = data.contract;
+
+          if (data.connected) {
+            document.getElementById("contractStatus").innerHTML = "✓ Connected";
+
+            document.getElementById("contractStatus").className =
+              "value status";
+          } else {
+            document.getElementById("contractStatus").innerText =
+              "Not Connected";
+          }
+        } catch (error) {
+          document.getElementById("contractStatus").innerText =
+            "Connection Error";
+
+          console.error(error);
+        }
+      }
+
+      // =========================================================
+      // MetaMask Connection
+      // =========================================================
+
+      async function connectWallet() {
+        if (!window.ethereum) {
+          alert("MetaMask is not installed. " + "Please install MetaMask.");
+
+          return;
+        }
+
+        try {
+          const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+
+          const address = accounts[0];
+
+          document.getElementById("walletAddress").innerText = address;
+
+          document.getElementById("walletText").innerText = "Wallet Connected";
+
+          document.getElementById("walletDot").classList.add("connected");
+
+          // Check network
+
+          const chainId = await window.ethereum.request({
+            method: "eth_chainId",
+          });
+
+          if (chainId.toLowerCase() === "0xaa36a7") {
+            document.getElementById("network").innerText = "Ethereum Sepolia ✓";
+          } else {
+            document.getElementById("network").innerText = "Wrong Network";
+          }
+        } catch (error) {
+          console.error(error);
+
+          alert("Wallet connection was cancelled.");
+        }
+      }
+
+      // =========================================================
+      // Run Biometric Verification
+      // =========================================================
+
+      async function runVerification() {
+        const button = document.getElementById("verifyButton");
+
+        const user = document.getElementById("userSelect").value;
+
+        button.disabled = true;
+
+        button.innerText = "⏳ Processing...";
+
+        showMessage(
+          "Running multimodal biometric verification. " +
+            "This may take a little while...",
+        );
+
+        try {
+          const response = await fetch("/api/verify", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              user_id: user,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (!data.success) {
+            throw new Error(data.error || "Verification failed");
+          }
+
+          // -------------------------------------------------
+          // Scores
+          // -------------------------------------------------
+
+          document.getElementById("faceScore").innerText = data.face_score;
+
+          document.getElementById("fingerprintScore").innerText =
+            data.fingerprint_score;
+
+          document.getElementById("irisScore").innerText = data.iris_score;
+
+          document.getElementById("similarity").innerText = data.similarity;
+
+          // -------------------------------------------------
+          // Result
+          // -------------------------------------------------
+
+          document.getElementById("resultBadge").innerText = data.result;
+
+          // -------------------------------------------------
+          // SHA-256
+          // -------------------------------------------------
+
+          document.getElementById("hash").innerText = data.verification_hash;
+
+          // -------------------------------------------------
+          // Blockchain Record
+          // -------------------------------------------------
+
+          document.getElementById("blockchainUserId").innerText =
+            data.blockchain_user_id || "—";
+
+          document.getElementById("blockchainVerified").innerText =
+            data.blockchain_verified !== null
+              ? data.blockchain_verified
+                ? "VERIFIED"
+                : "REJECTED"
+              : "—";
+
+          document.getElementById("blockchainTimestamp").innerText =
+            data.blockchain_timestamp || "—";
+
+          // -------------------------------------------------
+          // Blockchain Transaction
+          // -------------------------------------------------
+
+          document.getElementById("blockchainStatus").innerText =
+            data.blockchain_status;
+
+          document.getElementById("blockNumber").innerText =
+            data.block_number || "—";
+
+          document.getElementById("transactionHash").innerText =
+            data.transaction_hash || "No transaction hash";
+
+          showMessage("✓ Verification completed successfully.");
+        } catch (error) {
+          console.error(error);
+
+          showMessage("Error: " + error.message);
+        } finally {
+          button.disabled = false;
+
+          button.innerText = "▶ Run Verification";
+        }
+      }
+
+      // =========================================================
+      // Message
+      // =========================================================
+
+      function showMessage(text) {
+        const message = document.getElementById("message");
+
+        message.innerText = text;
+
+        message.style.display = "block";
+      }
+
+      // =========================================================
+      // Page Load
+      // =========================================================
+
+      loadBlockchainInfo();
+    </script>
+  </body>
+</html>
