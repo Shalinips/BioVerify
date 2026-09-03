@@ -463,10 +463,9 @@ The verification record is submitted to the smart contract.
 The blockchain transaction is mined on Ethereum Sepolia.
 The transaction hash and block number are obtained.
 The blockchain record can be retrieved using the user ID.
+
 🧠 Concepts Demonstrated
-
 This project demonstrates the practical implementation of:
-
 Multimodal biometric verification
 Deep learning
 Convolutional neural networks
@@ -488,6 +487,7 @@ Ethereum blockchain
 Sepolia testnet
 MetaMask integration
 Git and GitHub
+
 🔐 Security Considerations
 Synthetic biometric data is used for the prototype.
 Real personal biometric data is not used.
@@ -497,10 +497,9 @@ Private keys must never be committed to the repository.
 SHA-256 is used as a cryptographic hash for integrity identification.
 The blockchain component uses the Ethereum Sepolia test network.
 The current implementation is a prototype and is not intended as a production biometric authentication system.
+
 🚀 Future Enhancements
-
 Potential future improvements include:
-
  Larger and more diverse biometric datasets
  Formal threshold optimization using ROC, FAR, FRR, and EER
  Improved adaptive weight learning
@@ -512,6 +511,7 @@ Potential future improvements include:
  Production blockchain deployment
  Enhanced frontend interface
  Real-world biometric sensor integration
+
 👩‍💻 About the Project
 BioVerify
 
@@ -522,9 +522,7 @@ The project focuses on understanding how deep learning can be combined with dece
 The prototype demonstrates an end-to-end pipeline from biometric feature extraction to blockchain-backed verification recording.
 
 📄 License
-
 This project is developed for academic and educational purposes.
-
 No specific open-source license has been declared for this repository.
 
 <div align="center">
